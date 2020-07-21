@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Question;
+use App\User;
 
 class controller_question extends Controller
 {
@@ -56,7 +57,7 @@ class controller_question extends Controller
      */
     public function show($id)
     {
-        //
+        return view('id_user', ['id_user' => Question::findOrFail($id)]);
     }
 
     /**
