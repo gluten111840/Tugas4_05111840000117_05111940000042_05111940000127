@@ -17,14 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', 'controller_user@getRegister')->name('register');
-Route::post('/register', 'controller_user@postRegister');
+Route::get('/register', 'controller_user@getRegister')->name('register')->middleware('guest');
+Route::post('/register', 'controller_user@postRegister')->middleware('guest');
 
-Route::get('/login', 'controller_user@getLogin')->name('login');
-Route::post('/login', 'controller_user@postLogin');
+Route::get('/login', 'controller_user@getLogin')->middleware('guest')->name('login');
+Route::post('/login', 'controller_user@postLogin')->middleware('guest');
 
 Route::get('/home',function(){
     return view('home');
-})->name('home');
+})->middleware('auth')->name('home');
 
-Route::get('/logout','controller_user@logout')->name('logout');
+Route::get('/logout','controller_user@logout')->middleware('auth')->name('logout');

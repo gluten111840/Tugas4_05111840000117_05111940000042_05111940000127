@@ -18,7 +18,7 @@ class controller_user extends Controller
 
     public function postLogin(Request $request)
     {
-        if(!\Auth::attempt(['username' => $request->username, 'password' => $request->password])){
+        if(!auth()->attempt(['username' => $request->username, 'password' => $request->password])){
             return redirect()->back();
         }
 
@@ -36,17 +36,21 @@ class controller_user extends Controller
             'username' => 'required|min:4',
             'password' => 'required|min:6|confirmed'
         ]);
-        User::create([
+        $user = User::create([
             'username' => $request->username,
             'password' => bcrypt($request->password)
         ]);
 
-        return redirect()->back();
+        auth()->loginUsingId($user->id);
+
+        // User Login
+
+        return redirect()->route('home');
     }
 
     public function logout()
     {
-        \Auth::logout();
+        auth()->logout();
 
         return redirect()->route('login');
     }
