@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 Route::get('/home/question', 'controller_question@index');
 Route::post('store', 'controller_question@store')->name('store');
+
+Route::get('/answer','ControllerAnswer@index')->name('index');
