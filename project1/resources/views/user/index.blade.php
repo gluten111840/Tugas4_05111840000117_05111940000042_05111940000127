@@ -51,11 +51,7 @@
                 </div> 
                 <h3 style="text-align: left;">Question</h3>
                 <div class="form-group">
-                    <textarea class="form-control" name="question" rows="5" placeholder="input your question here"></textarea>
-                </div>
-                <h3 style="text-align: left;">id user</h3>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="id_user" placeholder="input your id here">
+                    <textarea class="form-control" name="question" rows="10" placeholder="input your question here"></textarea>
                 </div>
                 <input type="submit" class="btn btn-info" value="Submit">
             </form>

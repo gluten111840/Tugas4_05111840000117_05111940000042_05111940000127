@@ -43,7 +43,7 @@ class controller_question extends Controller
         Question::create([
             'title' => $request->title,
             'question' => $request->question,
-            'id_user' => $request->id_user
+            'id_user' => 1
         ]);
         return redirect()->back();
     }
