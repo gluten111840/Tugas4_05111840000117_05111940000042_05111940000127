@@ -18,9 +18,9 @@ class controller_question extends Controller
     {
         // $users = DB::select('select * from users where active = ?', [1]);
         // dd($users);
-        $users = Question::all();
+        // $users = Question::all();
         // $users = Question::where('question', '=', '')->get();
-        return view('user.index', ['users' => $users]);
+        return view('question.index');
     }
 
     /**
