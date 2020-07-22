@@ -17,7 +17,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/home/question', 'controller_question@index');
 Route::post('store', 'controller_question@store')->name('store');
 
 Route::get('/answer','ControllerAnswer@index')->name('index');
+
+Route::get('/register', 'controller_user@getRegister')->name('register')->middleware('guest');
+Route::post('/register', 'controller_user@postRegister')->middleware('guest');
+
+Route::get('/login', 'controller_user@getLogin')->middleware('guest')->name('login');
+Route::post('/login', 'controller_user@postLogin')->middleware('guest');
+
+Route::get('/home',function(){
+    return view('home');
+})->middleware('auth')->name('home');
+
+Route::get('/logout','controller_user@logout')->middleware('auth')->name('logout');
+
