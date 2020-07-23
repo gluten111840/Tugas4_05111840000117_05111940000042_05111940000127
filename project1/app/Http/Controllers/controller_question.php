@@ -93,13 +93,13 @@ class controller_question extends Controller
 
     public function tampil()
     {
-        $questions = Question::all();
-        return view('question.homeee', compact('questions'));
+        $questions = Question::with('user')->get();
+        return view('question.homeee', compact('questions'))->with('questions',$questions);
     }
 
     public function tampil_user()
     {
         $users = DB::table('users');
-        return;
+        return ;
     }
 }

@@ -8,7 +8,7 @@ Home
     <div class="module">
         <div class="module-head">
             <h3>
-            {{ Auth::user()->username ?? ''}}'s Question</h3>
+            {{ $question->user }}'s Question</h3>
         </div>
         <div class="module-body">
             <h2>{{ $question->title }}</h2>

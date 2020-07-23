@@ -21,6 +21,7 @@ Ask Your Question Here!
                     <textarea class="span8" name="question" rows="10" placeholder="input your question here"></textarea>
                 </div>
                 <input type="submit" class="btn btn-info" value="Submit">
+                <a role="button" class="btn btn-danger" href="homeee">Back</a>
             </form>
             
         </div>
