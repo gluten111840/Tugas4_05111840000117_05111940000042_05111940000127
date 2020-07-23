@@ -11,6 +11,7 @@
         <link type="text/css" href="{{asset('template')}}/images/icons/css/font-awesome.css" rel="stylesheet">
         <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
             rel='stylesheet'>
+        
         @yield('css')
         <script scr="{{asset('template')}}/scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
         <script scr="{{asset('template')}}/scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
@@ -42,8 +43,9 @@
                             <li class="nav-user dropdown"><a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
+                                    <li><a href="#">Hello, {{ Auth::user()->username ?? ''}}!</a></li>
                                     <li><a href="question">Ask Your Question!</a></li>
-                                    <li><a href="#">Answer?</a></li>
+                                    <li><a href="#">Your Answers</a></li>
                                     <li class="divider"></li>
                                     <li><a href="{{ route('logout') }}">Logout</a></li>
                                 </ul>
@@ -58,6 +60,7 @@
         <!-- /navbar -->
         <div class="wrapper">
             <div class="container">
+                @yield('hello')
                 <div class="row">
                     <div class="span12">
                         @yield('main')
