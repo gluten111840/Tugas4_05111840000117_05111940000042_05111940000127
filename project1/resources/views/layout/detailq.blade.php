@@ -31,6 +31,13 @@
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
                         <i class="icon-reorder shaded"></i></a><a class="brand" href="homeee">Edmin </a>
                     <div class="nav-collapse collapse navbar-inverse-collapse">
+                   
+                        <form class="navbar-search pull-left input-append" action="#" method="GET" role="search">
+                            <input type="text" class="span3" name="search" value="{{ old('search') }}" placeholder="search">
+                            <button class="btn" type="submit">
+                                <i class="icon-search"></i>
+                            </button>
+                        </form>
                         <ul class="nav pull-right">
                             <li class="nav-user dropdown"><a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <b class="caret"></b></a>
@@ -62,10 +69,5 @@
             <!--/.container-->
         </div>
         <!--/.wrapper-->
-        <div class="footer">
-            <div class="container">
-                <b class="copyright">&copy; 2014 Edmin - EGrappler.com </b>All rights reserved.
-            </div>
-        </div>
     </body>
 </html>

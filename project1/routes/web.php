@@ -21,6 +21,10 @@ Route::get('/', function () {
 
 Route::get('/question', 'controller_question@index')->middleware('auth')->name('question');
 Route::get('/homeee','controller_question@tampil')->name('tampil');
+Route::get('/homeee/search','controller_question@search')->name('search_question');
+Route::get('{id}/edit','controller_question@edit')->name('edit');
+Route::put('/update', 'controller_question@update')->name('update');
+Route::get('{id}/delete','controller_question@delete')->name('delete');
 
 Route::get('/answer','ControllerAnswer@index')->name('index');
 

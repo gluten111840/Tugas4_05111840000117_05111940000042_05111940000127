@@ -65,7 +65,8 @@ class controller_question extends Controller
      */
     public function edit($id)
     {
-        //
+        $questions = Question::find($id);
+        return view('question.edittt', compact('questions'));
     }
 
     /**
@@ -75,9 +76,13 @@ class controller_question extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        Question::where('id', $request->id)->update([
+            'title' => $request->title,
+            'question' => $request->question
+        ]);
+        return redirect()->route('tampil');
     }
 
     /**
@@ -93,13 +98,23 @@ class controller_question extends Controller
 
     public function tampil()
     {
-        $questions = Question::with('user')->get();
+        $questions = DB::table('questions')->paginate(5);
         return view('question.homeee', compact('questions'))->with('questions',$questions);
     }
 
-    public function tampil_user()
+    public function search(Request $request)
     {
-        $users = DB::table('users');
-        return ;
+        $search = $request->search;
+        $questions = DB::table('questions')
+        ->where('title','like',"%".$search."%")
+        ->paginate();
+        return view('homeee',['questions' => $questions]);
+    }
+
+    public function delete($id)
+    {
+        $questions = Question::find($id);
+        $questions->delete();
+        return redirect()->route('tampil');
     }
 }
