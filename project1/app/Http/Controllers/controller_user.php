@@ -21,7 +21,7 @@ class controller_user extends Controller
         if(!auth()->attempt(['username' => $request->username, 'password' => $request->password])){
             return redirect()->back();
         }
-
+        dd(auth()->user()->id);
         return redirect()->route('home');
     }
 

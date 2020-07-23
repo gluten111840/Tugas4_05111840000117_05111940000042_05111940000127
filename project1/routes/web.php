@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home/question', 'controller_question@index');
+Route::get('/home/question', 'controller_question@index')->name('question');
 Route::post('store', 'controller_question@store')->name('store');
 
 Route::get('/answer','ControllerAnswer@index')->name('index');
