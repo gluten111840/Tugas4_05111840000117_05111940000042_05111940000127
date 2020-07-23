@@ -59,7 +59,6 @@
         <div class="wrapper">
             <div class="container">
                 <div class="row">
-                    <!--/.span3-->
                     <div class="span9">
                         @yield('main')
                         <!--/.content-->

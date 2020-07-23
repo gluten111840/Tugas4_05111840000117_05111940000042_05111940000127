@@ -1,4 +1,4 @@
-@extends('layout.deatilq')
+@extends('layout.detailq')
 @section('title')
 Ask Your Question Here!
 @endsection

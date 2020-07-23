@@ -19,9 +19,14 @@ Route::get('/', function () {
 });
 
 Route::get('/home/question', 'controller_question@index')->name('question');
+
+Route::get('/answer','ControllerAnswer@index')->name('index');
+
+Route::get('/home/question', 'controller_question@index');
 Route::post('store', 'controller_question@store')->name('store');
 
 Route::get('/answer','ControllerAnswer@index')->name('index');
+
 
 Route::get('/register', 'controller_user@getRegister')->name('register')->middleware('guest');
 Route::post('/register', 'controller_user@postRegister')->middleware('guest');
