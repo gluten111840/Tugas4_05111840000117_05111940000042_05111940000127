@@ -45,7 +45,7 @@
                                     <li><a href="#">Edit Profile</a></li>
                                     <li><a href="#">Account Settings</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Logout</a></li>
+                                    <li><a href="{{ route('logout') }}">Logout</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -59,7 +59,7 @@
         <div class="wrapper">
             <div class="container">
                 <div class="row">
-                    <div class="span9">
+                    <div class="span12">
                         @yield('main')
                         <!--/.content-->
                     </div>

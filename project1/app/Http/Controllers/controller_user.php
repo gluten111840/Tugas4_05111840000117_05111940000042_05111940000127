@@ -21,12 +21,8 @@ class controller_user extends Controller
         if(!Auth::attempt(['username' => $request->username, 'password' => $request->password])){
             return redirect()->back();
         }
-<<<<<<< HEAD
-        dd(auth()->user()->id);
-=======
         // dd(Auth::user()->id);
->>>>>>> origin/user
-        return redirect()->route('home');
+        return redirect()->route('tampil');
     }
 
    
@@ -52,7 +48,7 @@ class controller_user extends Controller
      
         // User Login
 
-        return redirect()->route('home');
+        return redirect()->route('tampil');
     }
 
     public function logout()

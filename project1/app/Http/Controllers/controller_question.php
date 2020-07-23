@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Question;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class controller_question extends Controller
 {
@@ -16,10 +17,6 @@ class controller_question extends Controller
      */
     public function index()
     {
-        // $users = DB::select('select * from users where active = ?', [1]);
-        // dd($users);
-        // $users = Question::all();
-        // $users = Question::where('question', '=', '')->get();
         return view('question.index');
     }
 
@@ -44,7 +41,7 @@ class controller_question extends Controller
         Question::create([
             'title' => $request->title,
             'question' => $request->question,
-            'id_user' => 1
+            'id_user' => Auth::user()->id
         ]);
         return redirect()->back();
     }
@@ -57,7 +54,7 @@ class controller_question extends Controller
      */
     public function show($id)
     {
-        return view('id_user', ['id_user' => Question::findOrFail($id)]);
+        //
     }
 
     /**
@@ -92,5 +89,17 @@ class controller_question extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function tampil()
+    {
+        $questions = Question::all();
+        return view('question.homeee', compact('questions'));
+    }
+
+    public function tampil_user()
+    {
+        $users = DB::table('users');
+        return;
     }
 }

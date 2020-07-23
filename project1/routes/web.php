@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\controller_question;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home/question', 'controller_question@index')->name('question');
+Route::get('/question', 'controller_question@index')->middleware('auth')->name('question');
+Route::get('/homeee','controller_question@tampil')->name('tampil');
 
 Route::get('/answer','ControllerAnswer@index')->name('index');
 
-Route::get('/home/question', 'controller_question@index');
 Route::post('store', 'controller_question@store')->name('store');
 
 Route::get('/answer','ControllerAnswer@index')->name('index');
