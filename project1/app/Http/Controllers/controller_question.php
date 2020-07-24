@@ -151,9 +151,10 @@ class controller_question extends Controller
     {
         $myquestion = DB::table('questions')
         ->join('users', 'users.id', '=', 'questions.id_user')
-        ->select('users.username', 'users.id',
+        ->select('users.username', 'users.id as id_user',
             'questions.title', 'questions.question', 
-            'questions.created_at', 'questions.updated_at')
+            'questions.created_at', 'questions.updated_at', 
+            'questions.id')
         ->orderBy('created_at','desc')
         ->paginate(5);
         return view('question.myquestion', compact('myquestion'))->with('questions',$myquestion);
