@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\controller_question;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
-})->name('index');
+//     return view('home');
+// })->name('index');
 
-Route::get('/home/question', 'controller_question@index');
+// Route::get('/home/question', 'controller_question@index');
+    return view('welcome');
+});
+
 Route::post('store', 'controller_question@store')->name('store');
+Route::get('/question', 'controller_question@index')->middleware('auth')->name('question');
+Route::get('/homeee','controller_question@tampil')->name('tampil');
+Route::get('/search','controller_question@search')->name('search_question');
+Route::get('{id}/edit','controller_question@edit')->name('edit');
+Route::put('/update', 'controller_question@update')->name('update');
+Route::get('{id}/delete','controller_question@delete')->name('delete');
 
 Route::get('/register', 'controller_user@getRegister')->name('register')->middleware('guest');
 Route::post('/register', 'controller_user@postRegister')->middleware('guest');

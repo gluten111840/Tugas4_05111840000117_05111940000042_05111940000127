@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Question;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class controller_question extends Controller
 {
@@ -16,10 +17,6 @@ class controller_question extends Controller
      */
     public function index()
     {
-        // $users = DB::select('select * from users where active = ?', [1]);
-        // dd($users);
-        // $users = Question::all();
-        // $users = Question::where('question', '=', '')->get();
         return view('question.index');
     }
 
@@ -44,7 +41,7 @@ class controller_question extends Controller
         Question::create([
             'title' => $request->title,
             'question' => $request->question,
-            'id_user' => 1
+            'id_user' => Auth::user()->id
         ]);
         return redirect()->back();
     }
@@ -57,7 +54,7 @@ class controller_question extends Controller
      */
     public function show($id)
     {
-        return view('id_user', ['id_user' => Question::findOrFail($id)]);
+        //
     }
 
     /**
@@ -68,7 +65,8 @@ class controller_question extends Controller
      */
     public function edit($id)
     {
-        //
+        $questions = Question::find($id);
+        return view('question.edittt', compact('questions'));
     }
 
     /**
@@ -78,9 +76,13 @@ class controller_question extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        Question::where('id', $request->id)->update([
+            'title' => $request->title,
+            'question' => $request->question
+        ]);
+        return redirect()->route('tampil');
     }
 
     /**
@@ -92,5 +94,34 @@ class controller_question extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function tampil()
+    {
+        Question::orderBy('created_at','desc')->get();
+        $questions = DB::table('questions')
+        ->join('users', 'users.id', '=', 'questions.id_user')
+        ->select('users.username', 'users.id',
+            'questions.title', 'questions.question', 
+            'questions.created_at', 'questions.updated_at')
+        ->paginate(5);
+        return view('question.homeee', compact('questions'))->with('questions',$questions);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $questions = DB::table('questions')
+        ->join('users', 'users.id', '=', 'questions.id_user')
+        ->where('title','like',"%".$search."%")
+        ->paginate(5);
+        return view('question.search',['questions' => $questions]);
+    }
+
+    public function delete($id)
+    {
+        $questions = Question::find($id);
+        $questions->delete();
+        return redirect()->route('tampil');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
-
+use Illuminate\Support\Facades\Auth;
 
 class controller_user extends Controller
 {
@@ -18,12 +18,14 @@ class controller_user extends Controller
 
     public function postLogin(Request $request)
     {
-        if(!auth()->attempt(['username' => $request->username, 'password' => $request->password])){
+        if(!Auth::attempt(['username' => $request->username, 'password' => $request->password])){
             return redirect()->back();
         }
-
-        return redirect()->route('index');
+        // dd(Auth::user()->id);
+        return redirect()->route('tampil');
     }
+
+   
 
     public function getRegister()
     {
@@ -41,16 +43,17 @@ class controller_user extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        auth()->loginUsingId($user->id);
-
+        Auth::loginUsingId($user->id);
+        
+     
         // User Login
 
-        return redirect()->route('index');
+        return redirect()->route('tampil');
     }
 
     public function logout()
     {
-        auth()->logout();
+        Auth::logout();
 
         return redirect()->route('index');
     }
