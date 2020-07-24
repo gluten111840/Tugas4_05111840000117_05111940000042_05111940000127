@@ -22,7 +22,7 @@ class controller_user extends Controller
             return redirect()->back();
         }
 
-        return redirect()->route('home');
+        return redirect()->route('index');
     }
 
     public function getRegister()
@@ -45,14 +45,14 @@ class controller_user extends Controller
 
         // User Login
 
-        return redirect()->route('home');
+        return redirect()->route('index');
     }
 
     public function logout()
     {
         auth()->logout();
 
-        return redirect()->route('login');
+        return redirect()->route('index');
     }
 
     // /**
