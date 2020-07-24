@@ -19,6 +19,7 @@ Home
         <div class="module-head">
             <h3>
             {{ $question->username }}'s Question</h3>
+            <p>Created at : {{ $question->created_at }}</p>
         </div>
         <div class="module-body">
             <h2>{{ $question->title }}</h2>

@@ -98,10 +98,12 @@ class controller_question extends Controller
 
     public function tampil()
     {
+        Question::orderBy('created_at','desc')->get();
         $questions = DB::table('questions')
         ->join('users', 'users.id', '=', 'questions.id_user')
         ->select('users.username', 'users.id',
-            'questions.title', 'questions.question')
+            'questions.title', 'questions.question', 
+            'questions.created_at', 'questions.updated_at')
         ->paginate(5);
         return view('question.homeee', compact('questions'))->with('questions',$questions);
     }
