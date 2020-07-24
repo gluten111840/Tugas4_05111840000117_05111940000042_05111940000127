@@ -114,13 +114,13 @@ class controller_question extends Controller
     {
         $questions = DB::table('questions')
         ->join('users', 'users.id', '=', 'questions.id_user')
-        ->select('users.username', 'users.id',
+        ->select('users.username', 'questions.id',
             'questions.title', 'questions.question', 
             'questions.created_at', 'questions.updated_at',
             'users.id as id_user')
         ->orderBy('created_at','desc')
         ->paginate(5);
-        return view('question.homeee', compact('questions'))->with('questions',$questions);
+        return view('question.homeee', compact('questions'));
     }
 
     public function search(Request $request)
