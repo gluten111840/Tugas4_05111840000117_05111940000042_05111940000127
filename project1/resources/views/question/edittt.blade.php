@@ -10,7 +10,7 @@ Ask Your Question Here!
                 Edit Your Question</h3>
         </div>
         <div class="module-body">
-            <form action="{{ route('update') }}" method="POST">
+            <form action="{{ route('home.question.update') }}" method="POST">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="{{ $questions->id }}">
@@ -23,7 +23,7 @@ Ask Your Question Here!
                     <input type="text" class="span8" name="question" value="{{ $questions->question }}">
                 </div>
                 <input type="submit" class="btn btn-info" value="Edit">
-                <a role="button" class="btn btn-danger" href="../homeee">Back</a>
+                <a role="button" class="btn btn-danger" href="{{ route('home.tampil') }}">Back</a>
             </form>
             
         </div>

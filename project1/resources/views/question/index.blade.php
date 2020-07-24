@@ -10,7 +10,7 @@ Ask Your Question Here!
                 Ask Your Question Here!</h3>
         </div>
         <div class="module-body">
-            <form action="{{ route('store') }}" method="POST">
+            <form action="{{ route('home.question.store') }}" method="POST">
                 @csrf
                 <h3 style="text-align: left;">Title</h3>
                 <div class="form-group">

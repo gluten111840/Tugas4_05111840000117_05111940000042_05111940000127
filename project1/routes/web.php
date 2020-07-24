@@ -15,22 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-//     return view('home');
-// })->name('index');
-
-// Route::get('/home/question', 'controller_question@index');
-    return view('welcome');
-});
-
-Route::post('store', 'controller_question@store')->name('store');
-Route::get('/question', 'controller_question@index')->middleware('auth')->name('question');
-Route::get('/homeee','controller_question@tampil')->name('tampil');
-Route::get('/search','controller_question@search')->name('search_question');
-Route::get('{id}/edit','controller_question@edit')->name('edit');
-Route::put('/update', 'controller_question@update')->name('update');
-Route::get('{id}/delete','controller_question@delete')->name('delete');
-
 Route::get('/register', 'controller_user@getRegister')->name('register')->middleware('guest');
 Route::post('/register', 'controller_user@postRegister')->middleware('guest');
 
@@ -41,12 +25,26 @@ Route::get('/logout','controller_user@logout')->middleware('auth')->name('logout
 
 
 Route::prefix('home')->middleware('auth')->name('home.')->group(function(){
+    
+    Route::get('/','controller_question@tampil')->name('tampil')->middleware('auth');
+    
+    Route::prefix('question')->name('question.')->group(function(){
+        Route::post('store', 'controller_question@store')->name('store');
+        Route::get('/question', 'controller_question@index')->middleware('auth')->name('question');
+        Route::get('/search','controller_question@search')->name('search_question');
+        Route::get('{id}/edit','controller_question@edit')->name('edit');
+        Route::put('/update', 'controller_question@update')->name('update');
+        Route::get('{id}/delete','controller_question@delete')->name('delete');
+        Route::get('{id}/show','controller_question@show')->name('show');
+        Route::get('showall','controller_question@showall')->name('showall');
+    });
+
     Route::prefix('answer')->name('answer.')->group(function(){
         Route::get('{id_user}','ControllerAnswer@index')->name('index');
         Route::get('{id_user}/show','ControllerAnswer@show')->name('show');
         Route::post('store', 'ControllerAnswer@store')->name('store');
         Route::get('{id_answer}/edit', 'ControllerAnswer@edit')->name('edit');
-        Route::patch('{id_answer}/edit', 'ControllerAnswer@update');
-        Route::delete('{id_user}/{id_answer}/delete', 'ControllerAnswer@destroy')->name('delete');
+        Route::patch('{id_answer}/edit', 'ControllerAnswer@update')->name('update');
+        Route::get('{id_answer}/delete', 'ControllerAnswer@destroy')->name('delete');
     });
 });

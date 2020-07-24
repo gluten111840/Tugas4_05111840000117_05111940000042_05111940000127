@@ -14,25 +14,35 @@ Home
 @endsection
 @section('main')
 <div class="content">
-    @foreach($questions as $key => $question)
-    <div class="module">
-        <div class="module-head">
-            <h3>
-            {{ $question->username }}'s Question</h3>
-            <p>Created at : {{ $question->created_at }}</p>
-        </div>
-        <div class="module-body">
-            <h2>{{ $question->title }}</h2>
-            <p>{{ $question->question }}</p>
-        </div>
-        <div class="container">
-            <a href="#" class="btn btn-warning">Answer</a>
-            <a href="{{ route('edit', $question->id) }}" class="btn btn-info">Edit</a>
-            <a href="{{ route('delete', $question->id) }}" class="btn btn-danger">Delete</a>
-        </div>
-            
+    <div class="stream-list">
+        @foreach($questions as $key => $question)
+        <div class="media stream">
+            <div class="media-body">
+                <div class="stream-headline">
+                    <h5 class="stream-author">
+                    {{ $question->username }}
+                        <small>{{ $question->created_at }}</small>
+                    </h5>
+                    <div class="stream-text">
+                        <h2>{{ $question->title }}</h2>
+                        <p>{{ $question->question }}</p>
+                    </div>
+                </div><!--/.stream-headline-->
+
+                <div class="stream-options">
+
+                    <a href="{{ route('home.question.show', $question->id) }}" class="btn btn-small">
+                        <i class="icon-reply shaded"></i>
+                        Reply
+                    </a>
+                    @if(Auth::user()->id == $question->id_user)
+                    <a href="{{ route('home.question.edit', $question->id) }}" class="btn btn-small">Edit</a>
+                    <a href="{{ route('home.question.delete', $question->id) }}" class="btn btn-small">Delete</a>
+                    @endif
+                </div>
+            </div>
+        </div><!--/.media .stream-->
+        @endforeach
     </div>
-    @endforeach
-    {{ $questions->links() }}
 </div>
 @endsection

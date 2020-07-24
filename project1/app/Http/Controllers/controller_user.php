@@ -22,7 +22,7 @@ class controller_user extends Controller
             return redirect()->back();
         }
         // dd(Auth::user()->id);
-        return redirect()->route('tampil');
+        return redirect()->route('home.question.tampil');
     }
 
    
@@ -55,7 +55,7 @@ class controller_user extends Controller
     {
         Auth::logout();
 
-        return redirect()->route('index');
+        return redirect()->route('login');
     }
 
     // /**

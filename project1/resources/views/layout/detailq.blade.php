@@ -24,16 +24,21 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <style>
+                        .stoke{
+                border: 1px solid black;
+            }
+        </style>
     </head>
     <body>
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                        <i class="icon-reorder shaded"></i></a><a class="brand" href="homeee">Edmin </a>
+                        <i class="icon-reorder shaded"></i></a><a class="brand" href="{{ route('home.tampil') }}">Edmin </a>
                     <div class="nav-collapse collapse navbar-inverse-collapse">
                    
-                        <form class="navbar-search pull-left input-append" action="{{ route('search_question') }}" method="GET" role="search">
+                        <form class="navbar-search pull-left input-append" action="{{ route('home.question.search_question') }}" method="GET" role="search">
                             <input type="text" class="span3 validate" name="search" value="{{ old('search') }}" placeholder="search">
                             <button class="btn" type="submit">
                                 <i class="icon-search"></i>
@@ -45,7 +50,8 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Hello, {{ Auth::user()->username ?? ''}}!</a></li>
                                     <li><a href="question">Ask Your Question!</a></li>
-                                    <li><a href="#">Your Answers</a></li>
+                                    <li><a href="{{ route('home.question.showall') }}">Your Questions</a></li>
+                                    <li><a href="{{ route('home.answer.index',Auth::user()->id) }}">Your Answers</a></li>
                                     <li class="divider"></li>
                                     <li><a href="{{ route('logout') }}">Logout</a></li>
                                 </ul>

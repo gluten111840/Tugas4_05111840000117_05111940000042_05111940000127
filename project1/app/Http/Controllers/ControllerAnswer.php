@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Question;
+use App\User;
+use App\Answer;
+use Illuminate\Support\Facades\Auth;
 
 class ControllerAnswer extends Controller
 {
@@ -11,9 +16,14 @@ class ControllerAnswer extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_user)
     {
-        return view('answer.index');
+        $answers = Answer::where('answers.id_user',$id_user)
+                    ->join('questions','questions.id','=','answers.id_question')
+                    ->select('answers.*','questions.title')
+                    ->get();
+        // dd($answers);
+        return view('answer.index',compact('answers'));
     }
 
     /**
@@ -34,8 +44,14 @@ class ControllerAnswer extends Controller
      */
     public function store(Request $request)
     {
-        
-        return redirect()->back();
+        // dd($request);
+        Answer::create([
+            'answer' => $request->answer,
+            'id_question' => $request->id_question,
+            'id_user' => Auth::user()->id
+        ]);
+
+        return redirect()->route('home.question.show', $request->id_question);
     }
 
     /**
@@ -57,7 +73,9 @@ class ControllerAnswer extends Controller
      */
     public function edit($id)
     {
-        //
+        $answer = Answer::where('id',$id)->first();
+
+        return view('answer.edit', compact('answer'));
     }
 
     /**
@@ -69,7 +87,10 @@ class ControllerAnswer extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Answer::where('id', $request->id)->update([
+            'answer' => $request->answer
+        ]);
+        return redirect()->route('home.question.show', $request->id_question);
     }
 
     /**
@@ -80,6 +101,8 @@ class ControllerAnswer extends Controller
      */
     public function destroy($id)
     {
-        //
+        Answer::find($id)->delete();
+
+        return redirect()->back();
     }
 }

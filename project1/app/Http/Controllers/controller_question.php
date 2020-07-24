@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Question;
 use App\User;
+use App\Answer;
 use Illuminate\Support\Facades\Auth;
 
 class controller_question extends Controller
@@ -54,7 +55,20 @@ class controller_question extends Controller
      */
     public function show($id)
     {
-        //
+        $question = DB::table('questions')
+                    ->join('users', 'users.id', '=', 'questions.id_user')
+                    ->select('users.username', 'questions.id',
+                    'questions.title', 'questions.question', 
+                    'questions.created_at', 'questions.updated_at',
+                    'users.id as id_user')
+                    ->where('questions.id',$id)
+                    ->first();
+        $answers = Answer::where('id_question',$id)
+                            ->join('users','users.id','=','answers.id_user')
+                            ->select('users.*','answers.*','users.id as user_id')
+                            ->get();
+        // dd($question);
+        return view('question.show', compact('question','answers'));
     }
 
     /**
@@ -82,7 +96,7 @@ class controller_question extends Controller
             'title' => $request->title,
             'question' => $request->question
         ]);
-        return redirect()->route('tampil');
+        return redirect()->route('home.tampil');
     }
 
     /**
@@ -103,7 +117,8 @@ class controller_question extends Controller
         ->join('users', 'users.id', '=', 'questions.id_user')
         ->select('users.username', 'users.id',
             'questions.title', 'questions.question', 
-            'questions.created_at', 'questions.updated_at')
+            'questions.created_at', 'questions.updated_at',
+            'users.id as id_user')
         ->paginate(5);
         return view('question.homeee', compact('questions'))->with('questions',$questions);
     }
@@ -122,6 +137,13 @@ class controller_question extends Controller
     {
         $questions = Question::find($id);
         $questions->delete();
-        return redirect()->route('tampil');
+        return redirect()->route('home.tampil');
+    }
+
+    public function showall()
+    {
+        $questions = Question::where('id_user',Auth::user()->id)->get();
+
+        return view('question.showall',compact('questions'));
     }
 }

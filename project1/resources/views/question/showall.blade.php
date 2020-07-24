@@ -20,7 +20,7 @@ detail question
                             title question
                         </th>
                         <th>
-                            answer
+                            question
                         </th>
                         <th>
                             create at
@@ -28,21 +28,21 @@ detail question
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($answers as $answer)
+                    @foreach($questions as $question)
                     <tr>
                         <td>
                             {{$loop->iteration}}
                         </td>
                         <td>
-                            <a href="{{ route('home.question.show', $answer->id_question) }}" style="text-decoration: none;">
-                                {{ $answer->title}}
+                            <a href="{{ route('home.question.show', $question->id) }}" style="text-decoration: none;">
+                                {{ $question->title}}
                             </a>
                         </td>
                         <td>
-                            {{ $answer->answer }}
+                            {{ $question->question }}
                         </td>
                         <td>
-                            {{ $answer->created_at }}
+                            {{ $question->created_at }}
                         </td>
                     </tr>
                     @endforeach
