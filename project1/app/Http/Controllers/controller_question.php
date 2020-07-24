@@ -98,12 +98,12 @@ class controller_question extends Controller
 
     public function tampil()
     {
-        Question::orderBy('created_at','desc')->get();
         $questions = DB::table('questions')
         ->join('users', 'users.id', '=', 'questions.id_user')
         ->select('users.username', 'users.id',
             'questions.title', 'questions.question', 
             'questions.created_at', 'questions.updated_at')
+        ->orderBy('created_at','desc')
         ->paginate(5);
         return view('question.homeee', compact('questions'))->with('questions',$questions);
     }
@@ -123,5 +123,17 @@ class controller_question extends Controller
         $questions = Question::find($id);
         $questions->delete();
         return redirect()->route('tampil');
+    }
+
+    public function myquestion()
+    {
+        $myquestion = DB::table('questions')
+        ->join('users', 'users.id', '=', 'questions.id_user')
+        ->select('users.username', 'users.id',
+            'questions.title', 'questions.question', 
+            'questions.created_at', 'questions.updated_at')
+        ->orderBy('created_at','desc')
+        ->paginate(5);
+        return view('question.myquestion', compact('myquestion'))->with('questions',$myquestion);
     }
 }

@@ -1,6 +1,6 @@
 @extends('layout.detailq')
 @section('title')
-Ask Your Question Here!
+Edit Your Question
 @endsection
 @section('main')
 <div class="content">

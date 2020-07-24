@@ -30,7 +30,7 @@
             <div class="navbar-inner">
                 <div class="container">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                        <i class="icon-reorder shaded"></i></a><a class="brand" href="homeee">Edmin </a>
+                        <i class="icon-reorder shaded"></i></a><a class="brand" href="../homeee">Edmin </a>
                     <div class="nav-collapse collapse navbar-inverse-collapse">
                    
                         <form class="navbar-search pull-left input-append" action="{{ route('search_question') }}" method="GET" role="search">
@@ -45,6 +45,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Hello, {{ Auth::user()->username ?? ''}}!</a></li>
                                     <li><a href="question">Ask Your Question!</a></li>
+                                    <li><a href="{{ route('myquestion') }}">Your Questions</a></li>
                                     <li><a href="#">Your Answers</a></li>
                                     <li class="divider"></li>
                                     <li><a href="{{ route('logout') }}">Logout</a></li>

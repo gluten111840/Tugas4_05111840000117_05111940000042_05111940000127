@@ -12,6 +12,9 @@ Home
 	}
 </style>
 @endsection
+@section('hello')
+<h1>Home</h1>
+@endsection
 @section('main')
 <div class="content">
     @foreach($questions as $key => $question)
