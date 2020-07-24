@@ -49,7 +49,7 @@
                                 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Hello, {{ Auth::user()->username ?? ''}}!</a></li>
-                                    <li><a href="question">Ask Your Question!</a></li>
+                                    <li><a href="{{ route('home.question.create') }}">Ask Your Question!</a></li>
                                     <li><a href="{{ route('home.question.showall') }}">Your Questions</a></li>
                                     <li><a href="{{ route('home.answer.index',Auth::user()->id) }}">Your Answers</a></li>
                                     <li class="divider"></li>

@@ -30,7 +30,7 @@ Route::prefix('home')->middleware('auth')->name('home.')->group(function(){
     
     Route::prefix('question')->name('question.')->group(function(){
         Route::post('store', 'controller_question@store')->name('store');
-        Route::get('/question', 'controller_question@index')->middleware('auth')->name('question');
+        Route::get('/question', 'controller_question@index')->name('create');
         Route::get('/search','controller_question@search')->name('search_question');
         Route::get('{id}/edit','controller_question@edit')->name('edit');
         Route::put('/update', 'controller_question@update')->name('update');

@@ -44,5 +44,6 @@ Home
         </div><!--/.media .stream-->
         @endforeach
     </div>
+    {{ $questions->links() }}
 </div>
 @endsection
