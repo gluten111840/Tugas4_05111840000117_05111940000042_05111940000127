@@ -31,9 +31,9 @@ My Questions
                 <p>{{ $question->question }}</p>
             </div>
             <div class="container">
-                <a href="#" class="btn btn-warning">Answer</a>
-                <a href="{{ route('edit', $question->id) }}" class="btn btn-info">Edit</a>
-                <a href="{{ route('delete', $question->id) }}" class="btn btn-danger">Delete</a>
+                <a href="{{ route('home.question.show', $question->id) }}" class="btn btn-warning">Answer</a>
+                <a href="{{ route('home.question.edit', $question->id) }}" class="btn btn-info">Edit</a>
+                <a href="{{ route('home.question.delete', $question->id) }}" class="btn btn-danger">Delete</a>
             </div>
                 
         </div>
