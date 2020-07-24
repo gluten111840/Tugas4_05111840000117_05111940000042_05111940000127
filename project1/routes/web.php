@@ -37,6 +37,7 @@ Route::prefix('home')->middleware('auth')->name('home.')->group(function(){
         Route::get('{id}/delete','controller_question@delete')->name('delete');
         Route::get('{id}/show','controller_question@show')->name('show');
         Route::get('showall','controller_question@showall')->name('showall');
+        Route::get('/question/my', 'controller_question@myquestion')->name('myquestion');
     });
 
     Route::prefix('answer')->name('answer.')->group(function(){

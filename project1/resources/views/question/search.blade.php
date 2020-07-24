@@ -1,6 +1,6 @@
 @extends('layout.detailq')
 @section('title')
-Home
+Search Result
 @endsection
 @section('css')
 <style type="text/css">
@@ -11,6 +11,9 @@ Home
         font-size: 20px;
 	}
 </style>
+@endsection
+@section('hello')
+<h1>Search Result</h1>
 @endsection
 @section('main')
 <div class="content">
