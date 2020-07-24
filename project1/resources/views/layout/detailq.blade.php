@@ -33,8 +33,8 @@
                         <i class="icon-reorder shaded"></i></a><a class="brand" href="homeee">Edmin </a>
                     <div class="nav-collapse collapse navbar-inverse-collapse">
                    
-                        <form class="navbar-search pull-left input-append" action="#" method="GET" role="search">
-                            <input type="text" class="span3" name="search" value="{{ old('search') }}" placeholder="search">
+                        <form class="navbar-search pull-left input-append" action="{{ route('search_question') }}" method="GET" role="search">
+                            <input type="text" class="span3 validate" name="search" value="{{ old('search') }}" placeholder="search">
                             <button class="btn" type="submit">
                                 <i class="icon-search"></i>
                             </button>

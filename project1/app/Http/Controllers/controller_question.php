@@ -98,7 +98,11 @@ class controller_question extends Controller
 
     public function tampil()
     {
-        $questions = DB::table('questions')->paginate(5);
+        $questions = DB::table('questions')
+        ->join('users', 'users.id', '=', 'questions.id_user')
+        ->select('users.username', 'users.id',
+            'questions.title', 'questions.question')
+        ->paginate(5);
         return view('question.homeee', compact('questions'))->with('questions',$questions);
     }
 
@@ -106,9 +110,10 @@ class controller_question extends Controller
     {
         $search = $request->search;
         $questions = DB::table('questions')
+        ->join('users', 'users.id', '=', 'questions.id_user')
         ->where('title','like',"%".$search."%")
-        ->paginate();
-        return view('homeee',['questions' => $questions]);
+        ->paginate(5);
+        return view('question.search',['questions' => $questions]);
     }
 
     public function delete($id)

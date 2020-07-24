@@ -18,7 +18,7 @@ Home
     <div class="module">
         <div class="module-head">
             <h3>
-            's Question</h3>
+            {{ $question->username }}'s Question</h3>
         </div>
         <div class="module-body">
             <h2>{{ $question->title }}</h2>
