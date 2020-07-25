@@ -128,6 +128,10 @@ class controller_question extends Controller
         $search = $request->search;
         $questions = DB::table('questions')
         ->join('users', 'users.id', '=', 'questions.id_user')
+        ->select('users.username', 'users.id as id_user',
+            'questions.title', 'questions.question', 
+            'questions.created_at', 'questions.updated_at', 
+            'questions.id')
         ->where('title','like',"%".$search."%")
         ->paginate(5);
         return view('question.search',['questions' => $questions]);
